@@ -8,6 +8,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import "react-native-get-random-values";
 import { nanoid } from 'nanoid';
 
 import * as Location from 'expo-location';

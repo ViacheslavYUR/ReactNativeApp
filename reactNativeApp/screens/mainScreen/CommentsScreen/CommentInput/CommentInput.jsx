@@ -1,18 +1,18 @@
-import { View, TextInput, TouchableOpacity } from 'react-native';
+import { View, TextInput, TouchableOpacity } from "react-native";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import { Feather } from '@expo/vector-icons';
+import { Feather } from "@expo/vector-icons";
 
-import styles from './CommentInputStyle';
-import { useSelector } from 'react-redux';
-import { getUserAuth } from '../../../../redux/selectors';
-import useKeyboardShownToggle from '../../../shared/Utils/useKeyboardShownToggle';
+import styles from "./CommentInputStyle";
+import { useSelector } from "react-redux";
+import { getUserAuth } from "../../../../redux/selectors";
+import useKeyboardShownToggle from "../../../shared/Utils/useKeyboardShownToggle";
+import "react-native-get-random-values";
+import { nanoid } from "nanoid";
 
-import { nanoid } from 'nanoid';
-
-import { db } from '../../../../firebase/config';
-import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { db } from "../../../../firebase/config";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 
 const postInitialState = {
   text: null,
@@ -35,7 +35,7 @@ const CommentInput = ({ id }) => {
       uid,
     };
 
-    const postsRef = doc(db, 'posts', `${id}`);
+    const postsRef = doc(db, "posts", `${id}`);
 
     await updateDoc(postsRef, {
       comments: arrayUnion(comment),
@@ -56,23 +56,23 @@ const CommentInput = ({ id }) => {
       <TextInput
         style={{
           ...styles.input,
-          borderColor: isInputFocused ? '#FF6C00' : '#E8E8E8',
+          borderColor: isInputFocused ? "#FF6C00" : "#E8E8E8",
         }}
         placeholder="Коментувати..."
-        placeholderTextColor={'#BDBDBD'}
-        inputmode={'text'}
-        keyboardType={'text'}
+        placeholderTextColor={"#BDBDBD"}
+        inputmode={"text"}
+        keyboardType={"text"}
         value={postState.text}
         onFocus={() => {
-          setIsInputFocused(prevState => !prevState);
+          setIsInputFocused((prevState) => !prevState);
           !keyboardShown && keyboardShownToggle();
         }}
         onBlur={() => {
-          setIsInputFocused(prevState => !prevState);
+          setIsInputFocused((prevState) => !prevState);
           !keyboardShown && keyboardShownToggle();
         }}
-        onChangeText={value => {
-          setPostState(prevState => ({
+        onChangeText={(value) => {
+          setPostState((prevState) => ({
             ...prevState,
             text: value,
           }));
@@ -82,7 +82,7 @@ const CommentInput = ({ id }) => {
       <TouchableOpacity
         style={{
           ...styles.btn,
-          backgroundColor: postState.text ? '#FF6C00' : '#BDBDBD',
+          backgroundColor: postState.text ? "#FF6C00" : "#BDBDBD",
         }}
         onPress={onAddCommentBtnPress}
       >
